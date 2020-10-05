@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>福州大学电子通行码</title>
+    <link type="text/css" rel="stylesheet" href="./福州大学电子通行码_files/app.css">
+    <link type="text/css" rel="stylesheet" href="./福州大学电子通行码_files/style.css">
+    <script src="./福州大学电子通行码_files/jquery-1.11.1.min.js"></script>
+    <script src="./福州大学电子通行码_files/jquery.qrcode.js"></script>
+    <script src="./福州大学电子通行码_files/utf.js"></script>
+    <style>
+body {
+    background:rgba(245,248,253,1);
+}
+.health-index{
+    padding: 16px;
+}
+.health-head {
+    background:linear-gradient(146deg,rgba(45,116,253,1) 0%,rgba(60,160,253,1) 100%);
+    box-shadow:0px 12px 16px 0px rgba(196,201,217,0.4);
+    border-radius:4px;
+    color: #fff;
+    padding: 16px;
+}
+.health-head-left,.health-head-right {
+    display: inline-block;
+    vertical-align: top;
+}
+.health-head-left {
+    width:calc(100% - 112px);
+}
+.health-head-left>div>img {
+    position: relative;
+    top: 2px;
+    margin-right: 4px;
+}
+.health-head-right {
+    width: 98px;
+}
+.health-head-right>img {
+    position: relative;
+    top: 5px;
+}
+.health-body{
+    margin-top: 16px;
+    padding: 16px 0;
+    text-align: center;
+    background:#fff;
+    box-shadow:0px 12px 16px 0px rgba(196,201,217,0.4);
+    border-radius:4px;
+}
+.health-body-date{
+    color:#EE3F15;
+    font-size:30px;
+    line-height: 40px;
+    display:inline-block;
+}
+.health-body-time{
+    display:inline-block;
+}
+.health-body-time>div{
+    display: inline-block;
+    width:109px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 30px;
+    margin: 12px 0;
+    border-radius:16px;
+    border:1px solid rgba(233,234,236,1);
+    
+}
+.passTimeSecond{
+    font-size:50px;
+    font-weight:bold;
+    color:red;
+}
+.health-body-code>div{
+    width:230px;
+    height:230px;
+    margin: 0 auto;
+}
+.health-body-des{
+    padding-top: 13px;
+    position: relative;
+}
+.health-body-des-font {
+    width:288px;
+    font-size:12px;
+    color:#767B8D;
+    line-height:17px;
+    padding-left: 16px;
+    margin: 0 auto;
+    position: relative;
+    text-align: left;
+}
+.health-body-des-font > img {
+    position: absolute;
+    left: 0;
+}
+.health-foot {
+    padding-top: 24px;
+}
+.health-foot>label{
+    font-size:12px;
+    width: 48px;
+    display: inline-block;
+    vertical-align: top;
+    color:rgba(196,201,217,1);
+    position: relative;
+    top: -8px;
+}
+.health-foot>span{
+    height:1px;
+    display: inline-block;
+    vertical-align: top;
+    /*background-color: #C4C9D9;*/
+    border-top: solid 1px #C4C9D9;
+    width: calc((100% - 48px)/2 - 10px);
+}
+</style>
+<script>
+window.setInterval(function (){
+	var nowTime = getNowFormatDate();
+	$(".passTimeMonth").text(getMonthAndDay());
+	$(".passTime").text(nowTime.split(" ")[1].substring(0,5));
+	$(".passTimeSecond").text(nowTime.split(" ")[1].substring(6,8));
+},1000);
+
+function getRequest() {  
+	   var url = location.search; // 获取url中"?"符后的字串
+	   var theRequest = new Object();  
+	   if (url.indexOf("?") != -1) {  
+	      var str = url.substr(1);  
+	      strs = str.split("&");  
+	      for(var i = 0; i < strs.length; i ++) {  
+	         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);  
+	      }  
+	   }  
+	   return theRequest;  
+} 
+
+function getNowFormatDate() {//获取当前时间
+	var date = new Date();
+	var seperator1 = "-";
+	var seperator2 = ":";
+	var month = date.getMonth() + 1<10? "0"+(date.getMonth() + 1):date.getMonth() + 1;
+	var strDate = date.getDate()<10? "0" + date.getDate():date.getDate();
+	var hour = date.getHours()<10?"0" + date.getHours():date.getHours();
+	var minute = date.getMinutes()<10?"0" + date.getMinutes():date.getMinutes();
+	var second = date.getSeconds()<10?"0" + date.getSeconds():date.getSeconds();
+	//var currentdate = date.getFullYear() + seperator1  + month  + seperator1  + strDate
+	var currentdate = month  + seperator1  + strDate
+			+ " "  + hour  + seperator2  + minute  + seperator2 + second
+			;
+	return currentdate;
+}
+function getMonthAndDay() {//获取当前时间
+	var date = new Date();
+	var month = date.getMonth() + 1;
+	var strDate = date.getDate();
+	var currentdate = month  + "月" + strDate +"日";
+	return currentdate;
+}
+</script></head>
+
+<body style="background-color:white;">
+    <div class="passApp">
+		<div class="passInfo" style="margin-top: 0%; text-align: initial; display: block;">
+			<div class="health-index">
+            <div class="health-head">
+                <div class="health-head-left">
+                    <div style="font-size:22px;" class="campusName">旗山校区</div>
+                    <div style="font-size:16px;padding:6px 0 0 0;" class="passTitle">学生电子通行码</div>
+                    <div style="font-size:18px;padding:16px 0 8px 0;width:900px;"><img src="./福州大学电子通行码_files/user.png"><span class="userName" style="font-weight:normal;font-size:18px;">孙俊鑫</span></div>
+                    <div style="font-size:16px;"><img src="./福州大学电子通行码_files/position.png"><span class="deptName"></span></div>
+                </div>
+                <div class="health-head-right">
+                    <img src="./福州大学电子通行码_files/logo.png" width="120">
+                </div>
+            </div>
+            <div class="health-body">
+                <div class="health-body-date passTimeMonth">10月5日</div>
+                <div class="health-body-time"><div class="passTime">21:05</div></div>
+                <div class="passTimeSecond">58</div>
+                <div class="health-body-code">
+                    <div id="qrCode" style="margin-top:20px;margin-bottom:37px;">
+                        <!-- 在这个div初始化二维码，样式已经写好了 -->
+                        <img src="./福州大学电子通行码_files/green.png" />
+                    <canvas width="230" height="230"></canvas></div>
+                </div>
+                <div class="plate" style="margin-top: -10px;"></div>
+                <div class="endTime"></div>
+                <div class="health-body-des">
+                    <div class="health-body-des-font"><img src="./福州大学电子通行码_files/tips.png" width="17" style="margin-left:-2px;"><span class="codeMsg" style="font-size:14px;">绿码：凭此码可在福州大学对应校区范围内通行，请现场扫码，主动出示，配合检查，并做好自身防护工作。码颜色将根据您的健康信息和通行权限动态更新，出行前请仔细检查。</span><br><br></div>
+                </div>
+            </div>
+            <div class="health-foot">
+                <span></span>
+                <label>福州大学</label>
+                <span></span>
+            </div>  
+            </div>
+		</div>
+    </div>
+
+</body><div style="width:32px!important;height:32px!important;display:none!important;background:#fff!important;border-radius:16px!important;box-shadow:4px 4px 8px #888!important;position:absolute!important;z-index:2147483647!important;"><svg href="javascript:void(0)" style="width:24px;height:24px;margin:4px!important;" "width="24" height="24" viewBox="0 0 768 768"><path d="M672 640.5v-417c0-18-13.5-31.5-31.5-31.5h-282l37.5 129h61.5v-33h34.5v33h115.5v33h-40.5c-10.5 40.5-33 79.5-61.5 112.5l87 85.5-22.5 24-87-85.5-28.5 28.5 25.5 88.5-64.5 64.5h225c18 0 31.5-13.5 31.5-31.5zM447 388.5c7.5 15 19.5 34.5 36 54 39-46.5 49.5-88.5 49.5-88.5h-127.5l10.5 34.5h31.5zM423 412.5l19.5 70.5 18-16.5c-15-16.5-27-34.5-37.5-54zM355.5 339c0-7.381-0.211-16.921-3-22.5h-126v49.5h70.5c-4.5 19.5-24 48-67.5 48-42 0-76.5-36-76.5-78s34.5-78 76.5-78c24 0 39 10.5 48 19.5l3 1.5 39-37.5-3-1.5c-24-22.5-54-34.5-87-34.5-72 0-130.5 58.5-130.5 130.5s58.5 130.5 130.5 130.5c73.5 0 126-52.5 126-127.5zM640.5 160.5c34.5 0 63 28.5 63 63v417c0 34.5-28.5 63-63 63h-256.5l-31.5-96h-225c-34.5 0-63-28.5-63-63v-417c0-34.5 28.5-63 63-63h192l28.5 96h292.5z" style="fill:#3e84f4;"></path></svg></div></html>
