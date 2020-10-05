@@ -121,6 +121,7 @@ body {
 }
 </style>
 <script>
+
 window.setInterval(function (){
 	var nowTime = getNowFormatDate();
 	$(".passTimeMonth").text(getMonthAndDay());
@@ -208,5 +209,9 @@ function getMonthAndDay() {//获取当前时间
        }
        if(theRequest.name) $("#myuserName")[0].innerText = decodeURI(theRequest.name);
 })()
+let firstNowTime = getNowFormatDate();
+$(".passTimeMonth").text(getMonthAndDay());
+$(".passTime").text(firstNowTime.split(" ")[1].substring(0,5));
+$(".passTimeSecond").text(firstNowTime.split(" ")[1].substring(6,8));
 </script>
 </html>
